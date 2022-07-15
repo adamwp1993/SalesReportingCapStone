@@ -1,5 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import webserver
+
+#Start up
+webserver.app
+
 import csv as csv
 
 # Import Data to dataframe
