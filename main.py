@@ -1,6 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import webserver
+import callAPI
+import params
 
 #Start up
 webserver.app
@@ -11,7 +13,7 @@ import csv as csv
 sales = pd.read_csv("Walmart.csv")
 print(sales.head(50))
 print(sales.describe())
-
+"""
 pd.set_option('display.float_format', lambda x: '%.9f' % x)
 
 
@@ -38,6 +40,8 @@ top_ten.plot(kind='bar', title='Highest Performing stores', figsize=(7, 4))
 
 f3 = plt.figure(3)
 bottom_ten.plot(kind='bar', title='Lowest Performing Stores', figsize=(7, 4))
+"""
 
 
-plt.show()
+
+# plt.show()
