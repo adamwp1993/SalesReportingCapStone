@@ -3,7 +3,7 @@ import callAPI
 import params
 
 app = Flask(__name__)
-
+app.static_folder = 'static'
 # Routing or Mapping - tie a URL to a python webpage
 # TODO - https://stackoverflow.com/questions/37259740/passing-variables-from-flask-to-javascript
 
@@ -19,16 +19,15 @@ def test():
     return "<h1>testing routes</h1>"
 
 
-@app.route('/embed')
-# Calls the PowerBI API and gets all data needed for embedding and displays it on the page.
-# Development function
+@app.route('/reports')
+# Display the reports on the report page
 def embed():
     auth_token = callAPI.get_auth_token(params.client_secret, params.client_id, params.login_url)
     embed_url = callAPI.get_embed_url(auth_token, params.workspace_id, params.test_report_id)
     embed_token = callAPI.get_embed_token(auth_token, params.workspace_id, params.test_report_id)
-    payload = f"Your Auth Token: {auth_token}\n\nYour embed URL: {embed_url}\n\nYour embed Token {embed_token}"
+    data = { 'embed_url': str(embed_url), 'embed_token': str(embed_token), 'report_id': str(params.test_report_id) }
 
-    return payload
+    return render_template('reports.html', data=data)
 
 
 # if you want to put variable in URL use angle brackets
@@ -45,7 +44,7 @@ def postme():
     else:
         return "try posting me next time!"
 
-# HTML templates return .html pages
+# HTML templates return .templates pages
 
 app.run(debug=True)
 
