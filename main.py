@@ -3,12 +3,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
-# import webserver
+import webserver
 import callAPI
 import params
 
 #Start up
-
+webserver.app
 
 import csv as csv
 
@@ -46,7 +46,7 @@ print("Linear Regression Variance score: " + str(model.score(x_test, y_test)))
 prediction = model.predict(x_test)
 
 
-user_input = [[72, 4.49, 289.109, 3.6, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]]
+user_input = [[82, 3.49, 250.109, 1.6, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 user_predictions = model.predict(user_input)
 print("Sales Predictions by Week")
 print(user_predictions)

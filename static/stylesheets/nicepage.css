@@ -37640,7 +37640,6 @@ a.u-link.u-text-hover-grey-90:hover {
         
         
         
-        
         }
 
         /** common-rules **/
@@ -37760,7 +37759,6 @@ a.u-link.u-text-hover-grey-90:hover {
         }
         .u-body
         {
-        background-image: url("images/OIP.jpg");
         background-size: contain;
         background-position: 50% 50%;
         background-repeat: no-repeat;
@@ -37930,7 +37928,7 @@ a.u-link.u-text-hover-grey-90:hover {
 }
 
 .u-header .u-sheet-1 {
-  min-height: 108px;
+  min-height: 121px;
 }
 
 .u-header .u-menu-1 {
@@ -37948,25 +37946,30 @@ a.u-link.u-text-hover-grey-90:hover {
 
 .u-header .u-text-1 {
   font-family: Almarai;
-  margin: -23px 429px 35px 0;
+  margin: -23px 429px 35px -23px;
 }
 @media (max-width: 1199px) {
   .u-header .u-text-1 {
     margin-top: -23px;
-    margin-right: 229px;
+    margin-right: 329px;
   }
 }
 @media (max-width: 991px) {
   .u-header .u-text-1 {
-    margin-right: 9px;
+    margin-right: 219px;
   }
 }
 @media (max-width: 767px) {
   .u-header .u-text-1 {
-    margin-right: 0;
+    margin-right: 129px;
   }
 }
-
+@media (max-width: 575px) {
+  .u-header .u-text-1 {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
  .u-footer {
   background-image: none;
 }

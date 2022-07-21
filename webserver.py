@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 import callAPI
 import params
 
@@ -6,6 +6,7 @@ app = Flask(__name__)
 app.static_folder = 'static'
 # Routing or Mapping - tie a URL to a python webpage
 # TODO - https://stackoverflow.com/questions/37259740/passing-variables-from-flask-to-javascript
+# TODO - https://www.freecodecamp.org/news/jquery-ajax-post-method/
 
 
 @app.route('/')
@@ -19,7 +20,7 @@ def test():
     return "<h1>testing routes</h1>"
 
 
-@app.route('/reports')
+@app.route('/reports',  methods=['GET', 'POST'])
 # Display the reports on the report page
 def embed():
     auth_token = callAPI.get_auth_token(params.client_secret, params.client_id, params.login_url)
@@ -29,6 +30,11 @@ def embed():
 
     return render_template('reports.html', data=data)
 
+@app.route('/predict', methods=['POST'])
+def predict():
+    data = request.get_json()
+    print(data)
+    return jsonify(data)
 
 # if you want to put variable in URL use angle brackets
 @app.route('/hello/<user>')
