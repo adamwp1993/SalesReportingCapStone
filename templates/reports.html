@@ -124,6 +124,10 @@
               <label for="text-1d9a" class="u-label">Gas Price</label>
               <input type="text" placeholder="" id="text-1d9a" name="gasPrice" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
             </div>
+              <div class="u-form-group u-form-group-5">
+              <label for="text-34" class="u-label">Unemployment rate</label>
+              <input type="text" placeholder="" id="text-34" name="unemployment" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white">
+            </div>
             <div class="u-form-checkbox u-form-group u-form-group-5">
               <input type="checkbox" id="checkbox-360e" name="holiday" value="On">
               <label for="checkbox-360e" class="u-label">Holiday</label>
@@ -137,7 +141,7 @@
             <input type="hidden" value="" name="recaptchaResponse">
           </form>
         </div>
-        <h4 class="u-text u-text-3">Predicted Sales</h4>
+        <h2 id="prediction" class="u-text u-text-3">Predicted Sales</h2>
       </div>
     </section>
   <script>
@@ -157,6 +161,7 @@
     temp: document.getElementById('temp-626c').value,
     cpi: document.getElementById('text-5032').value,
     gasPrice: document.getElementById('text-1d9a').value,
+    unemployment: document.getElementById('text-34').value,
     holiday: holiday
     }
 
@@ -169,6 +174,9 @@
 
         success: function(response) {
                     console.log(response);
+                    document.getElementById("prediction").innerHTML = response;
+                    // window.alert(response);
+
                 },
                 error: function(err) {
                     console.log(err);

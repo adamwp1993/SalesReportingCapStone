@@ -7,10 +7,11 @@ from sklearn.model_selection import train_test_split
 
 class Model:
 
-    def __init__(self):
+    @staticmethod
+    def predict(data):
         # Initialize the Linear regression model
         sales = pd.read_csv("Walmart.csv")
-        sales.dtypes
+        # sales.dtypes
 
         print(sales.dtypes)
         pd.set_option('display.float_format', lambda x: '%.9f' % x)
@@ -30,5 +31,18 @@ class Model:
         # build model
         model = LinearRegression()
 
-        self.lr_model = model.fit(x_train, y_train)
+        model.fit(x_train, y_train)
 
+        # index 0 = temp, 1 = gas, 2 = CPI, 3 = unemployment rate 4 = isHoliday,
+        # 4 + store number = index of store number
+        user_input = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+          0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+        user_input[0][0] = int(data['temp'])
+        user_input[0][1] = float(data['gasPrice'])
+        user_input[0][2] = float(data['cpi'])
+        user_input[0][3] = float(data['unemployment'])
+        user_input[0][4] = int(data['holiday'])
+        index = 4 + int(data['storeNum'])
+        user_input[0][index] = 1
+
+        return model.predict(user_input)

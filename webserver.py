@@ -1,23 +1,43 @@
 from flask import Flask, request, render_template, jsonify
 import callAPI
 import params
+from model import Model
 
 app = Flask(__name__)
 app.static_folder = 'static'
+
+#Build ML model so we can call it later
+model = Model()
+
 # Routing or Mapping - tie a URL to a python webpage
 # TODO - https://stackoverflow.com/questions/37259740/passing-variables-from-flask-to-javascript
 # TODO - https://www.freecodecamp.org/news/jquery-ajax-post-method/
+
+
+def input_validation(data):
+    # return true if input is good
+    try:
+        store = int(data['storeNum'])
+        temp = int(data['temp'])
+        cpi = float(data['cpi'])
+        gasPrice = float(data['gasPrice'])
+    except ValueError:
+        return False
+
+    if 45 < store < 1:
+        return False
+    if 500 < cpi < 0:
+        return False
+    else:
+        return True
+
+
 
 
 @app.route('/')
 def home():
     return "<h1>Hello World!<h1>\n" \
            "Method Used to get this page: %s" % request.method
-
-
-@app.route('/test')
-def test():
-    return "<h1>testing routes</h1>"
 
 
 @app.route('/reports',  methods=['GET', 'POST'])
@@ -30,27 +50,19 @@ def embed():
 
     return render_template('reports.html', data=data)
 
+
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
-    print(data)
-    return jsonify(data)
+    valid = input_validation(data)
+    if not valid:
+        return "Invalid input"
+    result = model.predict(data)
 
-# if you want to put variable in URL use angle brackets
-@app.route('/hello/<user>')
-def hello(user):
-    return "<h1>Hello %s</h1>" % user
+    # Handle request
+    return str(result)
 
 
-# HTTP methods and handling different HTTP types
-@app.route('/postme', methods=['GET', 'POST'])
-def postme():
-    if request.method == 'POST':
-        return "Nioce post request!"
-    else:
-        return "try posting me next time!"
 
-# HTML templates return .templates pages
-
-app.run(debug=True)
+#app.run(debug=True)
 
