@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, redirect, session
 import callAPI
 import params
 from model import Model
@@ -6,12 +6,9 @@ from model import Model
 app = Flask(__name__)
 app.static_folder = 'static'
 
-#Build ML model so we can call it later
+# Build ML model so we can call it later
 model = Model()
-
-# Routing or Mapping - tie a URL to a python webpage
-# TODO - https://stackoverflow.com/questions/37259740/passing-variables-from-flask-to-javascript
-# TODO - https://www.freecodecamp.org/news/jquery-ajax-post-method/
+# Build database
 
 
 def input_validation(data):
@@ -32,12 +29,12 @@ def input_validation(data):
         return True
 
 
-
+# TODO - Build login page
 
 @app.route('/')
 def home():
-    return "<h1>Hello World!<h1>\n" \
-           "Method Used to get this page: %s" % request.method
+    return "<h1>Hello World!<h1>"
+
 
 
 @app.route('/reports',  methods=['GET', 'POST'])
@@ -46,7 +43,7 @@ def embed():
     auth_token = callAPI.get_auth_token(params.client_secret, params.client_id, params.login_url)
     embed_url = callAPI.get_embed_url(auth_token, params.workspace_id, params.test_report_id)
     embed_token = callAPI.get_embed_token(auth_token, params.workspace_id, params.test_report_id)
-    data = { 'embed_url': str(embed_url), 'embed_token': str(embed_token), 'report_id': str(params.test_report_id) }
+    data = {'embed_url': str(embed_url), 'embed_token': str(embed_token), 'report_id': str(params.test_report_id) }
 
     return render_template('reports.html', data=data)
 
@@ -60,9 +57,8 @@ def predict():
     result = model.predict(data)
 
     # Handle request
-    return str(result)
+    return "Predicted Sales: " + str(result[0]) + "<br> Model Accuracy/Variance: " + str(result[1])
 
 
 
-#app.run(debug=True)
 
