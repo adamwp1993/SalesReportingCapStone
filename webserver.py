@@ -1,7 +1,9 @@
 from flask import Flask, request, render_template, jsonify, redirect, session
+from datetime import timedelta
 import callAPI
 import params
 from model import Model
+from database import Database
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -9,7 +11,12 @@ app.static_folder = 'static'
 # Build ML model so we can call it later
 model = Model()
 # Build database
+database = Database()
+# Set Session timeout - default 20 minutes
+# session.permanent = True
+# app.permanent_session_lifetime = timedelta(minutes=20)
 
+sessions = {}
 
 def input_validation(data):
     # return true if input is good
@@ -30,11 +37,15 @@ def input_validation(data):
 
 
 # TODO - Build login page
+# TODO - loging page POST to server for login
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    return "<h1>Hello World!<h1>"
+    return "testing"
+    # username = request.form.get('username')
+    # password = request.form.get('password')
 
+    # valid = database.login(username, password)
 
 
 @app.route('/reports',  methods=['GET', 'POST'])

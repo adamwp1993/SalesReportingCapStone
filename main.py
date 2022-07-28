@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 import webserver
 import callAPI
 import params
+from database import Database
 
 #Start up
 
@@ -14,6 +15,7 @@ import params
 # if it does, connect to it
 
 # TODO - login functionality
+# Secure it -
 # Hash the password
 # set flask to use SSL?
 
