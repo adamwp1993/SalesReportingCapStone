@@ -8,21 +8,13 @@ import callAPI
 import params
 from database import Database
 
-#Start up
 
-
-# check if database exists
-# if it does, connect to it
-
-# TODO - login functionality
-# Secure it -
-# Hash the password
-# set flask to use SSL?
+# TODO - set flask to use SSL
 
 # TODO - Logging functionality
 # log exceptions and logins
 
-# Set up DB
+
 
 # Start web server
 webserver.app.run(debug=True)
