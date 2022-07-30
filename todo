@@ -1,8 +1,0 @@
-Fix the redirect
-Sessions for login
-Logging - log logins and exceptions, token retrieval success or failure
-exception handling for token failures
-input validation for login page
-Create account functionality
-Reset Password functionality
-Clean up and document
