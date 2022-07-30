@@ -48,7 +48,7 @@ class Database:
         # hash the given password + salt.
         # see if it exists in the DB for that user.
         # if so, return true.
-        insert = (user_name, password)
+
         connection = sqlite3.connect('user')
         cursor = connection.cursor()
 
@@ -56,7 +56,14 @@ class Database:
 
         find_user = cursor.execute("""
             SELECT user_id FROM User WHERE user_name = ?""", [user_name])
-        user_id = find_user.fetchone()
+
+        # return false if no username match
+        row = find_user.fetchone()
+        if row == None:
+            connection.close()
+            return False
+        # User ID is used as salt for the password
+        user_id = row
         salted_password = password + str(user_id[0])
         # Hash the password
         hashed_password = hashlib.sha256(salted_password.encode())
@@ -82,5 +89,17 @@ class Database:
         for row in rows:
             print(row)
         connection.close()
+
+    @staticmethod
+    def get_id(username):
+        connection = sqlite3.connect('user')
+        cursor = connection.cursor()
+
+        # find the user_id so we can salt the password with the unique user ID
+        find_user = cursor.execute("""
+                    SELECT user_id FROM User WHERE user_name = ?""", [username])
+        user_id = find_user.fetchone()
+        return user_id[0]
+
 
 
