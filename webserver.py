@@ -129,9 +129,9 @@ def logout():
 def reports():
 
     auth_token = callAPI.get_auth_token(params.client_secret, params.client_id, params.login_url)
-    embed_url = callAPI.get_embed_url(auth_token, params.workspace_id, params.test_report_id)
-    embed_token = callAPI.get_embed_token(auth_token, params.workspace_id, params.test_report_id)
-    data = {'embed_url': str(embed_url), 'embed_token': str(embed_token), 'report_id': str(params.test_report_id) }
+    embed_url = callAPI.get_embed_url(auth_token, params.workspace_id, params.report_id)
+    embed_token = callAPI.get_embed_token(auth_token, params.workspace_id, params.report_id)
+    data = {'embed_url': str(embed_url), 'embed_token': str(embed_token), 'report_id': str(params.report_id)}
     log_manager.write_log("Authentication and embed token retrieved from PowerBI API")
     return render_template('reports.html', data=data)
 
