@@ -152,6 +152,5 @@ def predict():
     # Handle request
     return "Predicted Sales: " + str(result[0]) + "<br> Model Accuracy/Variance: " + str(result[1])
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
+app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
 
