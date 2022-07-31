@@ -1,4 +1,5 @@
 import requests
+import gunicorn
 
 def get_auth_token(secret, client_id, login_url):
     # Returns an Authentication Token from PowerBI API.
