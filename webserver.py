@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, render_template, jsonify, redirect, session, url_for, flash, make_response
 from datetime import timedelta
 import callAPI
@@ -152,5 +153,5 @@ def predict():
     return "Predicted Sales: " + str(result[0]) + "<br> Model Accuracy/Variance: " + str(result[1])
 
 
-
+app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
 

@@ -17,4 +17,4 @@ from database import Database
 
 
 # Start web server
-webserver.app.run(debug=True)
+# webserver.app.run(debug=True)
